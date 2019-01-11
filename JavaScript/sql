@@ -1,0 +1,85 @@
+# 注释内容
+-- 注释内容
+-- 创建一个数据库
+
+CREATE DATABASE IF NOT EXISTS `test1` DEFAULT CHARACTER SET 'UTF8';
+
+USE `test1`;
+
+-- 注意当需要 输入中文的时候，需要临时转换客户端的编码方式
+-- SET NAMES GBK
+-- 字段注释，通过COMMENT 加上字段内容 给字段添加注释
+CREATE TABLE IF NOT EXISTS `user`(
+	id SMALLINT,
+	username VARCHAR(20),
+	age TINYINT,
+	sex ENUM('男','女','保密'),
+	email VARCHAR(50),
+	addr VARCHAR(200),
+	birth YEAR,
+	salary FLOAT(8,2),
+	tel INT,
+	married TINYINT(1) COMMENT '0代表为结婚，非0代表已结婚'
+)ENGINE=INNODB CHARSET=UTF8;
+
+-- 创建课程表 course
+-- 编号 cid
+-- 课程名称 courseName
+-- 课程描述 courseDesc
+CREATE TABLE IF NOT EXISTS `course`(
+	cid TINYINT,
+	courseName VARCHAR(50),
+	courseDesc VARCHAR(200)
+)ENGINE=INNODB CHARSET=UTF8;
+
+-- 创建新闻分类表 cms_cate
+-- 编号、分类名称、分类描述
+CREATE TABLE IF NOT EXISTS `cms_cate`(
+	bianhoa TINYINT,
+	fenleiName VARCHAR(50),
+	cmsDesc VARCHAR(200)
+)ENGINE=INNODB CHARSET=UTF8;
+
+-- 创建新闻表 cms_news
+-- 编号、新闻标题、新闻内容、新闻发布时间、点击量、是否置顶、新闻所属分类、发布人
+CREATE TABLE IF NOT EXISTS `cms_news`(
+	id INT,
+	title VARCHAR(50),
+	content TEXT,
+	pubTime INT,
+	clickNum INT,
+	isTop TINYINT(1) COMMENT '0不置顶，1置顶',
+	cid TEXT
+)ENGINE=INNODB CHARSET=UTF8;
+
+-- 测试整型
+CREATE TABLE test12(
+	num1 TINYINT,
+	num2 SMALLINT,
+	num3 MEDIUMINT,
+	num4 INT,
+	num5 BIGINT
+);
+-- 向表中插入数据 INSERT tbl_name VALUE|VALUES
+INSERT test12 VALUES(-128, -32768, -8388608, -2147483648, -9223372036854775808);
+INSERT test12 VALUES(-300, -32768, -8388608, -2147483648, -9223372036854775808);
+
+-- 查询表中所有记录 SELECT * FROM tbl_name;
+SELECT * FROM test12;
+
+-- 无符号UNSIGNED 
+-- 代表无符号
+CREATE TABLE test11(
+	num1 TINYINT UNSIGNED,
+	num2 TINYINT UNSIGNED,
+	num3 INT ZEROFILL
+);
+
+-- 测试浮点型
+CREATE TABLE test3(
+	num1 FLOAT(6,2),
+	num2 DOUBLE(6,2),
+	num3 DECIMAL(6,2)
+);
+INSERT test3 VALUES(3.1495, 3.1495, 3.1495);
+ 
